@@ -37,7 +37,7 @@ os.setComputerLabel("ReactorControl")
 
 -- Remove any prior, possibly old, versions of "reactorcontrol"
 shell.run("rm", "reactorcontrol")
--- Download http://pastebin.com/fguScPBQ and name "reactorcontrol"
-shell.run("pastebin", "get", "fguScPBQ", "reactorcontrol")
+-- Download http://pastebin.com/b1vSQWcj and name "reactorcontrol"
+shell.run("pastebin", "get", "b1vSQWcj", "reactorcontrol")
 
 shell.run("reactorcontrol")

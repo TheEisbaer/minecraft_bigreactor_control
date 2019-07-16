@@ -708,10 +708,12 @@ end -- UI.selectNextMonitor()
 
 
 UI.selectReactor = function(self)
-	monitorAssignments[monitorNames[self.monitorIndex]] = {type="Reactor", index=self.monitorIndex, reactorName=reactorNames[self.reactorIndex], reactorIndex=self.reactorIndex}
-	saveMonitorAssignments()
-	local messageText = "Selected reactor "..reactorNames[self.reactorIndex].." for display on "..monitorNames[self.monitorIndex]
-	self:logChange(messageText)
+	if self.reactorIndex <= #reactorList then
+		monitorAssignments[monitorNames[self.monitorIndex]] = {type="Reactor", index=self.monitorIndex, reactorName=reactorNames[self.reactorIndex], reactorIndex=self.reactorIndex}
+		saveMonitorAssignments()
+		local messageText = "Selected reactor "..reactorNames[self.reactorIndex].." for display on "..monitorNames[self.monitorIndex]
+		self:logChange(messageText)
+	end
 end -- UI.selectReactor()
 
 UI.selectPrevReactor = function(self)
@@ -726,9 +728,14 @@ end -- UI.selectPrevReactor()
 
 UI.selectNextReactor = function(self)
 	if self.reactorIndex >= #reactorList then
-		self.reactorIndex = 1
-		self.turbineIndex = 1
-		self:selectTurbine()
+		if #turbineList > 0 then
+			self.reactorIndex = 1
+			self.turbineIndex = 1
+			self:selectTurbine()
+		else
+			self.reactorIndex = 1
+			self:selectStatus()
+		end
 	else
 		self.reactorIndex = self.reactorIndex + 1
 		self:selectReactor()
@@ -737,10 +744,12 @@ end -- UI.selectNextReactor()
 
 
 UI.selectTurbine = function(self)
-	monitorAssignments[monitorNames[self.monitorIndex]] = {type="Turbine", index=self.monitorIndex, turbineName=turbineNames[self.turbineIndex], turbineIndex=self.turbineIndex}
-	saveMonitorAssignments()
-	local messageText = "Selected turbine "..turbineNames[self.turbineIndex].." for display on "..monitorNames[self.monitorIndex]
-	self:logChange(messageText)
+	if self.turbineIndex <= #turbineList then
+		monitorAssignments[monitorNames[self.monitorIndex]] = {type="Turbine", index=self.monitorIndex, turbineName=turbineNames[self.turbineIndex], turbineIndex=self.turbineIndex}
+		saveMonitorAssignments()
+		local messageText = "Selected turbine "..turbineNames[self.turbineIndex].." for display on "..monitorNames[self.monitorIndex]
+		self:logChange(messageText)
+	end
 end -- UI.selectTurbine()
 
 UI.selectPrevTurbine = function(self)
